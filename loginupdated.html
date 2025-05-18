@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <style>
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* Cover entire viewport with background.jpg */
+    background: url('images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Header with a slight glass-blur effect */
+  header {
+    position: relative;
+    height: 17vh;
+    padding: 20px;
+    text-align: center;
+    /* semi-transparent white overlay */
+    background: rgba(255,255,255,0.3);
+    /* apply blur to whatever is behind */
+    backdrop-filter: blur(8px);
+    background-color: lightskyblue;
+  }
+  
+  /* Logo sits in the header */
+  header .logo {
+   
+    max-height: 70px;
+
+  }
+  
+  .title{
+
+
+    font-size: 1.5em;
+    margin: 5px 0 0 0;
+
+  }
+
+
+
+  /* Main area grows to fill available space */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #333;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+  }
+  
+  /* Introductory text */
+  main .intro {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    color: aliceblue;
+    font-weight: bolder;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Form groups for selects */
+  .form-group {
+    margin-bottom: 1em;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.3em;
+  }
+  
+  .form-group select {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    font-size: 1em;
+  }
+  
+  /* Sign In button with curvature and hover */
+  .signinButton {
+    padding: 0.7em 2em;
+    margin-top: 1em;
+    border: none;
+    border-radius: 20px;
+    background-color: #0077cc;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .signinButton:hover {
+    background-color: #005fa3;
+  }
+  
+  
+
+  label{
+    color: aliceblue;
+  }
+
+  .gender-options {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+  }
+  
+  .gender-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1em;
+  }
+
+  /* 1. Make sure the page can scroll under the navbar */
+body {
+  margin: 0;
+  padding-bottom: 70px;   /* equal to navbar height */
+}
+
+/* 2. Sticky navbar at the bottom of the viewport */
+/* FOOTER — stays flush with the very bottom */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;          /* ← real bottom */
+  width: 100%;
+  height: 40px;       /* keep this value in sync */
+  background:#c00;
+  color:#fff;
+  text-align:center;
+  padding:10px 0;
+  font-size:.9em;
+  z-index:1000;
+}
+
+/* NAVBAR — sits right on top of the footer */
+.navbar{
+  position:fixed;
+  left:0;
+  bottom:40px;      /* footer’s height */
+  width:100%;
+  height:70px;
+  background:#222;
+  display:flex;
+  justify-content:center;
+  z-index:999;
+}
+
+/* Make sure page content doesn’t hide under the two bars
+   (navbar height + footer height) */
+body{
+  margin:0;
+  padding-bottom:110px;  /* 70 + 40 */
+}
+
+
+
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* 3. Footer that appears when you scroll past content */
+.site-footer {
+  text-align: center;
+  padding: 15px 10px;
+  background: #c00;
+  color: #fff;
+  font-size: 0.9em;
+}
+
+  </style>
+  <meta charset="UTF-8">
+  <title>Sign In</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img class="logo" src="images/logo.png" alt="Logo">
+    <h1 class="title">Matching Majors, Creating Bonds</h1>
+
+</header>
+
+  
+
+<nav class="navbar">
+  <ul class="nav-links">
+      <li>
+          <a href="index.html">
+              <img
+                  src="images/home.png"
+                  alt="Home"
+                  class="nav-icon"
+              />
+          </a>
+      </li>
+      <li id="swipes-button">
+          <a href="swipes.html">
+              <img
+                  src="images/matches.png"
+                  alt="Matches"
+                  class="nav-icon"
+              />
+          </a>
+      </li>
+      <li id="profile-button">
+          <a href="profile.html">
+              <img
+                  src="images/profile.png"
+                  alt="Profile"
+                  class="nav-icon"
+              />
+          </a>
+      </li>
+      <li>
+          <a href="game/">
+              <svg
+                  class="nav-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="32px"
+                  viewBox="0 -960 960 960"
+                  width="32px"
+                  fill="#e8eaed"
+              >
+                  <path
+                      d="M182-200q-51 0-79-35.5T82-322l42-300q9-60 53.5-99T282-760h396q60 0 104.5 39t53.5 99l42 300q7 51-21 86.5T778-200q-21 0-39-7.5T706-230l-90-90H344l-90 90q-15 15-33 22.5t-39 7.5Zm16-86 114-114h336l114 114q2 2 16 6 11 0 17.5-6.5T800-304l-44-308q-4-29-26-48.5T678-680H282q-30 0-52 19.5T204-612l-44 308q-2 11 4.5 17.5T182-280q2 0 16-6Zm482-154q17 0 28.5-11.5T720-480q0-17-11.5-28.5T680-520q-17 0-28.5 11.5T640-480q0 17 11.5 28.5T680-440Zm-80-120q17 0 28.5-11.5T640-600q0-17-11.5-28.5T600-640q-17 0-28.5 11.5T560-600q0 17 11.5 28.5T600-560ZM310-440h60v-70h70v-60h-70v-70h-60v70h-70v60h70v70Zm170-40Z"
+                  />
+              </svg>
+          </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+
+  <footer>
+    © 2024 BilMatch
+  </footer>
+
+  <script src="data.js"></script> <!-- your profile data -->
+  <script src="script.js"></script> <!-- new JavaScript you will create --
+  
+</body>
+</html>
