@@ -1,6 +1,11 @@
 import { Database } from 'bun:sqlite';
 import moment from 'moment';
 
+
+import cors from "cors";
+app.use(cors());
+
+
 type User = {
     id: string;
     name: string;
