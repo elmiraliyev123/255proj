@@ -2,6 +2,8 @@ import { animate, createDraggable, Draggable, JSAnimation } from "animejs";
 import { getCookie } from "./utils";
 import type { User } from "./types";
 
+const apiUrl = import.meta.env.VITE_API_URL; // ✅ use backend URL from .env
+
 function reset(animation: JSAnimation, draggable: Draggable) {
   if (animation) {
     animation.reset();
@@ -35,18 +37,17 @@ async function onSwipe(user: User, userCount: number) {
     const ageInMilis = Math.abs(user.birth_date * 1000 - now);
     const ageInYears = Math.round(ageInMilis / (1000 * 60 * 60 * 24 * 365));
 
-    const inner = /*html*/ ` <img
-    src="api/get_user_image/${user.id}"  
-    height="400"
-    alt=""
+    const inner = /*html*/ ` 
+    <img
+      src="${apiUrl}/api/get_user_image/${user.id}"  
+      height="400"
+      alt=""
       class="profile-image"
       onerror="this.src='images/NoProfilePic.png'"
     />
-
     <h3>${user.name}</h3>
     <h4>Age: ${ageInYears}</h4>
-    <div class="profile-desc">
-    </div>`;
+    <div class="profile-desc"></div>`;
 
     if (el) {
       el.innerHTML = inner;
@@ -60,7 +61,9 @@ async function onSwipe(user: User, userCount: number) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   selfUserId = getCookie("self-id");
-  const usersReq = await fetch("api/get_users/");
+
+  // ✅ call backend using full URL
+  const usersReq = await fetch(`${apiUrl}/api/get_users/`);
   users = await usersReq.json();
 
   onSwipe(users[index], users.length);
@@ -72,10 +75,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     x: {
       snap: [0, -(window.innerWidth / 2 - 250), +(window.innerWidth / 2 - 250)],
     },
-    //y: { snap: [window.innerHeight * 0.35] },
     onSnap: (draggable) => {
       if (draggable.destX > 0) {
-        // slide to right
         animation = animate(".draggable", {
           opacity: [{ to: 0, duration: 600 }],
           rotate: [{ to: "+30deg", duration: 600 }],
@@ -84,7 +85,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           },
         });
       } else {
-        // slide to left
         animation = animate(".draggable", {
           opacity: [{ to: 0, duration: 600 }],
           rotate: [{ to: "-30deg", duration: 600 }],
