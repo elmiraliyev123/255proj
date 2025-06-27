@@ -2,12 +2,15 @@ import { profiles } from "./data";
 import { eraseCookie, getCookie } from "./utils";
 import $ from "jquery";
 
+const apiUrl = import.meta.env.VITE_API_URL; // 🔌 Get backend URL from .env
+
 let currentIndex = 0; // Which profile we are currently showing
 
 document.addEventListener("DOMContentLoaded", async () => {
   if (getCookie("self-id")) {
-    const accountReq = await fetch(`/api/get_user/${getCookie("self-id")}`);
+    const accountReq = await fetch(`${apiUrl}/api/get_user/${getCookie("self-id")}`);
     const account = await accountReq.json();
+
     const accountHTML = /*html*/ `${account.name}
       <svg
         xmlns="http://www.w3.org/2000/svg"
