@@ -1,16 +1,19 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 import $ from "jquery";
 import { eraseCookie, getCookie } from "./utils";
 import type { User } from "./types";
 
 $(async () => {
   const currentUserID = getCookie("self-id");
-  const req = await fetch(`/api/get_user/${currentUserID}`);
+
+  const req = await fetch(`${apiUrl}/api/get_user/${currentUserID}`);
   const user: User = await req.json();
 
   $("#account-name-slot").html(`Hello, ${user.name}`);
 
   const imageHTML = /*html*/ `
-  <img src="/api/get_user_image/${user.id}" width="400"/> `;
+  <img src="${apiUrl}/api/get_user_image/${user.id}" width="400"/> `;
   $("#account-image-slot").html(imageHTML);
 
   $("#date-of-birth-slot").html(
@@ -18,7 +21,6 @@ $(async () => {
   );
 
   $("#name-slot").html(user.name);
-
   $("#surname-slot").html(user.surname);
 
   $("#log-out-button").on("click", () => {
@@ -31,9 +33,12 @@ $(async () => {
 
   $("#bio-submit-button").on("click", async () => {
     const bioText = $("#bio-entry").val();
-    await fetch(`/api/set_bio/${user.id}`, {
+    await fetch(`${apiUrl}/api/set_bio/${user.id}`, {
       method: "POST",
       body: JSON.stringify({ bio: bioText }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   });
 });
